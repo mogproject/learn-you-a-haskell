@@ -2,6 +2,83 @@
 
 ```
 $ ghci
+GHCi, version 8.6.4: http://www.haskell.org/ghc/  :? for help
+Prelude> :set prompt "ghci> "
+ghci> 2 + 15
+17
+ghci> 5 * -3
+
+<interactive>:3:1: error:
+    Precedence parsing error
+        cannot mix ‘*’ [infixl 7] and prefix `-' [infixl 6] in the same infix expression
+ghci> 5 * (-3)
+-15
+ghci> True || False
+True
+ghci> True /= False
+True
+ghci> True /= True
+False
+ghci> 5 == True
+
+<interactive>:8:1: error:
+    • No instance for (Num Bool) arising from the literal ‘5’
+    • In the first argument of ‘(==)’, namely ‘5’
+      In the expression: 5 == True
+      In an equation for ‘it’: it = 5 == True
+ghci> succ 1
+2
+ghci> pred 1
+0
+ghci> pred 0
+-1
+ghci> min 1 0
+0
+ghci> min 1 True
+
+<interactive>:13:5: error:
+    • No instance for (Num Bool) arising from the literal ‘1’
+    • In the first argument of ‘min’, namely ‘1’
+      In the expression: min 1 True
+      In an equation for ‘it’: it = min 1 True
+ghci> succ 9 + min 5 4 + 2
+16
+ghci> 1 min 2
+
+<interactive>:15:1: error:
+    • Non type-variable argument
+        in the constraint: Num ((a -> a -> a) -> t1 -> t2)
+      (Use FlexibleContexts to permit this)
+    • When checking the inferred type
+        it :: forall a t1 t2.
+              (Ord a, Num t1, Num ((a -> a -> a) -> t1 -> t2)) =>
+              t2
+ghci> min 1 2 3
+
+<interactive>:16:1: error:
+    • Non type-variable argument in the constraint: Ord (t1 -> t2)
+      (Use FlexibleContexts to permit this)
+    • When checking the inferred type
+        it :: forall t1 t2. (Ord (t1 -> t2), Num t1, Num (t1 -> t2)) => t2
+ghci> min 1 2
+1
+ghci> 3 `min` 3
+3
+ghci> 3 `min` 2
+2
+ghci>
+Leaving GHCi.
+```
+
+### Lists
+
+
+
+
+### Memo from four years ago
+
+```
+$ ghci
 GHCi, version 8.0.1: http://www.haskell.org/ghc/  :? for help
 Prelude> 2 + 15
 17
